@@ -1,9 +1,12 @@
 const router = require("express").Router();
 const gameController = require("../controllers/game.controller");
+const {
+  userAuthorization,
+} = require("../middleware.js/authorization.middleware");
 
-router.get("/", gameController.viewAllGames);
-router.get("/:gameId", gameController.viewGame);
-router.post("/", gameController.create);
-router.put("/", gameController.update);
+router.get("/", userAuthorization, gameController.viewAllGames);
+router.get("/:gameId", userAuthorization, gameController.viewGame);
+router.post("/", userAuthorization, gameController.create);
+router.put("/:gameId", userAuthorization, gameController.update);
 
 module.exports = router;

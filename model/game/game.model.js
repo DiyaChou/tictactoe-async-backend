@@ -17,6 +17,8 @@ const findGameById = (_id) => {
   return new Promise((resolve, reject) => {
     try {
       GameSchema.findById(_id)
+        .populate("player1", ["_id", "name"])
+        .populate("player2", ["_id", "name"])
         .then((data) => resolve(data))
         .catch((error) => reject(error));
     } catch (error) {
@@ -34,9 +36,25 @@ const findAllGamesPlayedByPlayerId = (_id) => {
           { player2: mongoose.Types.ObjectId(_id) },
         ],
       })
-        .populate("player1")
-        .populate("player2")
-        .sort([{ createdAt: -1 }])
+        .populate("player1", ["_id", "name"])
+        .populate("player2", ["_id", "name"])
+        .sort({ updatedAt: -1 })
+        .then((data) => resolve(data))
+        .catch((error) => reject(error));
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+const checkIfGameAlreadyGoingOn = (player1, player2) => {
+  return new Promise((resolve, reject) => {
+    try {
+      GameSchema.find({
+        player1: { $in: [player1, player2] },
+        player2: { $in: [player1, player2] },
+        status: "ongoing",
+      })
         .then((data) => resolve(data))
         .catch((error) => reject(error));
     } catch (error) {
@@ -49,4 +67,5 @@ module.exports = {
   createGame,
   findGameById,
   findAllGamesPlayedByPlayerId,
+  checkIfGameAlreadyGoingOn,
 };

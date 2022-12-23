@@ -23,10 +23,18 @@ const schema = new mongoose.Schema({
 
   status: {
     type: String,
-    enum: ["ongoing", "draw", "player1 won", "player2 won"],
+    enum: ["ongoing", "drawn", "won"],
   },
 
+  winner: {
+    type: String,
+    enum: ["player1", "player2"],
+  },
   createdAt: {
+    type: Date,
+    default: Date.now(),
+  },
+  updatedAt: {
     type: Date,
     default: Date.now(),
   },

@@ -10,7 +10,7 @@ dotenv.config();
 const PORT = process.env.PORT || 3001;
 app.use(express.json());
 app.use(cors());
-// mongoose.set("strictQuery", false);
+mongoose.set("strictQuery", false);
 
 mongoose
   .connect(process.env.MONGO_URI)

@@ -36,4 +36,21 @@ const findUserByEmail = (email) => {
   });
 };
 
-module.exports = { insertUser, findUserById, findUserByEmail };
+const findUserByUsername = (username) => {
+  return new Promise((resolve, reject) => {
+    try {
+      UserSchema.findOne({ username })
+        .then((data) => resolve(data))
+        .catch((error) => reject(error));
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+module.exports = {
+  insertUser,
+  findUserById,
+  findUserByEmail,
+  findUserByUsername,
+};
