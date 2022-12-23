@@ -5,6 +5,7 @@ const app = express();
 const userRouter = require("./routes/user.route");
 const gameRouter = require("./routes/game.route");
 const dotenv = require("dotenv");
+const { handleError } = require("./utils/errorHandler.utils");
 dotenv.config();
 
 const PORT = process.env.PORT || 3001;
@@ -19,6 +20,17 @@ mongoose
 
 app.use("/user", userRouter);
 app.use("/game", gameRouter);
+
+app.use("*", (req, res, next) => {
+  const error = new Error("Resources not found!");
+  error.status = 404;
+  next(error);
+});
+
+app.use((error, req, res, next) => {
+  console.log(error);
+  handleError(error, res);
+});
 
 app.listen(PORT, () => {
   console.log(`connected to http://localhost:${PORT}`);
