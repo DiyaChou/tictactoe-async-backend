@@ -91,7 +91,7 @@ const update = async (req, res) => {
     return res.status(200).json(params);
   } catch (error) {
     // todo more error handling
-    res.status(400).json({ message: error.message });
+    return res.status(400).json({ message: error.message });
   }
 };
 

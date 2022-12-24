@@ -19,7 +19,7 @@ const login = async (req, res) => {
       accessJWT: accessJWT,
     });
   } catch (error) {
-    res.status(400).json({ status: "error", message: error.message });
+    return res.status(400).json({ status: "error", message: error.message });
   }
 };
 
