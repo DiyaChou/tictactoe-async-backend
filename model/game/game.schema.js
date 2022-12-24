@@ -18,14 +18,11 @@ const schema = new mongoose.Schema({
     type: mongoose.Types.ObjectId,
     ref: "users",
   },
-
   nextTurn: { type: String, enum: ["player1", "player2"], default: "player1" },
-
   status: {
     type: String,
     enum: ["ongoing", "drawn", "won"],
   },
-
   winner: {
     type: String,
     enum: ["player1", "player2"],

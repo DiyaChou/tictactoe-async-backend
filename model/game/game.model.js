@@ -17,8 +17,8 @@ const findGameById = (_id) => {
   return new Promise((resolve, reject) => {
     try {
       GameSchema.findById(_id)
-        .populate("player1", ["_id", "name"])
-        .populate("player2", ["_id", "name"])
+        .populate("player1", ["_id", "name", "email"])
+        .populate("player2", ["_id", "name", "email"])
         .then((data) => resolve(data))
         .catch((error) => reject(error));
     } catch (error) {

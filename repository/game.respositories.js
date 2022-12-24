@@ -14,9 +14,15 @@ const viewGameParams = (game, playerId) => {
   }
   const message = g_status({ status, isMyTurn, didIWin });
   const opponent_name = amIPlayer1 ? player2.name : player1.name;
+  const opponent_email = amIPlayer1 ? player2.email : player1.email;
+
+  const opponent = {
+    name: opponent_name,
+    email: opponent_email,
+  };
   const params = {
     board,
-    opponent_name,
+    opponent,
     message,
     status,
     isMyTurn,
