@@ -31,7 +31,7 @@ const checkBoardForStatus = (board) => {
       board[element[0]] === board[element[1]] &&
       board[element[1]] === board[element[2]]
     ) {
-      result = board[element[0]] === "x" ? "player1 won" : "player2 won";
+      result = "won";
       break;
     }
 
@@ -41,7 +41,7 @@ const checkBoardForStatus = (board) => {
       });
   }
 
-  return result ? result : emptyFlag ? "draw" : "ongoing";
+  return result ? result : emptyFlag ? "drawn" : "ongoing";
 };
 
 const isPlayer1X = (x, amIPlayer1) => {
