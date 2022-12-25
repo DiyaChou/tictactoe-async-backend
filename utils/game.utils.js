@@ -60,7 +60,7 @@ const g_status = ({ status, isMyTurn, didIWin }) => {
   {
     switch (status) {
       case "won":
-        if (didIWin) return "You Win";
+        if (didIWin) return "You Won";
         else return "You Lost";
       case "drawn":
         return "It's a draw";

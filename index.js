@@ -7,6 +7,10 @@ const gameRouter = require("./routes/game.route");
 const dotenv = require("dotenv");
 const { handleError } = require("./utils/errorHandler.utils");
 dotenv.config();
+const morgan = require("morgan");
+if (process.env.NODE_ENV !== "production") {
+  app.use(morgan("tiny"));
+}
 
 const PORT = process.env.PORT || 3001;
 app.use(express.json());

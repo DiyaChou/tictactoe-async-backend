@@ -28,7 +28,7 @@ const create = async (req, res) => {
 
     const check = await checkIfGameAlreadyGoingOn(player1Id, player2._id);
     if (check.length > 0) {
-      throw new Error("cannot start a new game without ending previous game");
+      throw new Error("cannot start a new game without ending ongoing game");
     }
 
     const board = new Array(9).fill("");
@@ -41,7 +41,9 @@ const create = async (req, res) => {
     };
 
     const game = await createGame(params);
-    return res.status(200).json({ game });
+    return res
+      .status(200)
+      .json({ gameId: game._id, message: "action was successful" });
   } catch (error) {
     return res.status(400).json({ message: error.message });
   }
